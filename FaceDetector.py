@@ -6,8 +6,8 @@ class FaceDetector:
 	'''
 
 	def __init__(self,img):
-		self.face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-		self.eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+		self.face_cascade = cv2.CascadeClassifier('HaarCascades/haarcascade_frontalface_default.xml')
+		self.eye_cascade = cv2.CascadeClassifier('HaarCascades/haarcascade_eye.xml')
 		self.img = img
 		self.gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 		
