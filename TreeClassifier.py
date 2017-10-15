@@ -1,6 +1,7 @@
 import cv2
 from sklearn import tree
 from sklearn.metrics import accuracy_score
+import pickle
 
 class TreeClassifier:
 	'''
@@ -36,5 +37,24 @@ class TreeClassifier:
 		self.predicted_results = self.tree_classifier.predict(test_images)
 		return accuracy_score(test_target_y,predicted_results)
 
+	def saveClassifier(self,pickle_name):
+		'''
+		This module is to save the trained classifier as a pickle file to be reused.
+
+		#Parameters: 'pickle_name' is the name of the pickle file to be saved as.
+		#Return: None
+		'''
+		with open(pickle_name + '.pkl' , 'wb') as fid:
+			pickle.dump(self.tree_classifier,fid)
+
+	def loadClassifier(self,pickle_name):
+		'''
+		This module is to load the trained classifier from a pickle file.
+
+		#Parameters: 'pickle_name' is the name of the pickle file to be loaded.
+		#Return: None
+		'''
+		with open(pickle_name + '.pkl' , 'rb') as fid:
+			self.tree_classifier = pickle.load(fid)
 
 

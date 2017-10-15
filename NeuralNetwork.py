@@ -1,14 +1,14 @@
 import cv2
-from sklearn.neighbors import KNeighborsClassifier
+from tensorflow.contrib import learn
 from sklearn.metrics import accuracy_score
 
-class KNNClassifier:
+class NeuralNetwork:
 	'''
 	This class is used to train and test our K nearest neighbors classifier.
 	'''
 
 	def __init__(self):
-		self.KNN_classifier = KNeighborsClassifier()
+		self.DNN_classifier = learn.DNNClassifier(hidden_units = [10,20,10] , n_classes = 3)
 		self.train_images = []
 		self.test_images = []
 		self.predicted_results = []
@@ -22,7 +22,7 @@ class KNNClassifier:
 		#Return: None
 		'''
 		self.train_images = train_data_x
-		self.KNN_classifier.fit(train_data_x,train_target_y)
+		self.DNN_classifier.fit(train_data_x, train_target_y, steps = 200)
 
 	def testClassifier(self,test_data_x,test_target_y):
 		'''
@@ -33,7 +33,7 @@ class KNNClassifier:
 		#Return: Accuracy of the classifier.
 		'''
 		self.test_images = test_data_x
-		self.predicted_results = self.KNN_classifier.predict(test_images)
+		self.predicted_results = self.DNN_classifier.predict(test_images)
 		return accuracy_score(test_target_y,predicted_results)
 
 	def saveClassifier(self,pickle_name):
@@ -44,7 +44,7 @@ class KNNClassifier:
 		#Return: None
 		'''
 		with open(pickle_name + '.pkl' , 'wb') as fid:
-			pickle.dump(self.KNN_classifier,fid)
+			pickle.dump(self.DNN_classifier,fid)
 
 	def loadClassifier(self,pickle_name):
 		'''
@@ -54,7 +54,7 @@ class KNNClassifier:
 		#Return: None
 		'''
 		with open(pickle_name + '.pkl' , 'rb') as fid:
-			self.KNN_classifier = pickle.load(fid)
+			self.DNN_classifier = pickle.load(fid)
 
 
 
