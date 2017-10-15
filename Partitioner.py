@@ -96,7 +96,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of testing labels
 		'''
-		return train_target_y
+		return test_target_y
 
 
 			
