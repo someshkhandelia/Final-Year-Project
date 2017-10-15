@@ -1,6 +1,9 @@
 import cv2
 from tensorflow.contrib import learn
 from sklearn.metrics import accuracy_score
+import tensorflow as tf
+import numpy as np
+import pickle
 
 class NeuralNetwork:
 	'''
@@ -8,7 +11,8 @@ class NeuralNetwork:
 	'''
 
 	def __init__(self):
-		self.DNN_classifier = learn.DNNClassifier(hidden_units = [10,20,10] , n_classes = 3)
+		self.feature_columns = [tf.contrib.layers.real_valued_column("", dimension=1)]
+		self.DNN_classifier = learn.DNNClassifier(feature_columns=self.feature_columns,hidden_units=[10,20,10],n_classes=40)
 		self.train_images = []
 		self.test_images = []
 		self.predicted_results = []
@@ -20,7 +24,9 @@ class NeuralNetwork:
 		#Parameters: 'train_data_x' is the training image samples,
 					 'train_target_y' is the training labels for the training data. 
 		#Return: None
-		'''
+		'''		
+		train_data_x = np.asarray(train_data_x)
+		train_target_y = np.asarray(train_target_y)
 		self.train_images = train_data_x
 		self.DNN_classifier.fit(train_data_x, train_target_y, steps = 200)
 
@@ -32,9 +38,17 @@ class NeuralNetwork:
 					 'test_target_y' is the testing labels for the testing data.
 		#Return: Accuracy of the classifier.
 		'''
+		test_data_x = np.asarray(test_data_x)
 		self.test_images = test_data_x
-		self.predicted_results = self.DNN_classifier.predict(test_images)
-		return accuracy_score(test_target_y,predicted_results)
+		test_target_y = np.asarray(test_target_y)
+		self.predicted_results = self.DNN_classifier.predict(self.test_images)
+		print("Actual:")
+		print(test_target_y)
+		print("Predicted:")
+		print(list(self.predicted_results))
+		self.predicted_results = np.asarray(list(self.predicted_results))
+		#print('accuracy score: ')
+		print(accuracy_score(test_target_y,self.predicted_results))
 
 	def saveClassifier(self,pickle_name):
 		'''
@@ -44,7 +58,7 @@ class NeuralNetwork:
 		#Return: None
 		'''
 		with open(pickle_name + '.pkl' , 'wb') as fid:
-			pickle.dump(self.DNN_classifier,fid)
+			pickle.dump(self.DNN_classifier,fid)	
 
 	def loadClassifier(self,pickle_name):
 		'''

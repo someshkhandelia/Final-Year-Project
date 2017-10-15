@@ -42,7 +42,7 @@ class Partitioner:
 			for i in range(total_classes):
 				img = cv2.imread(base_dir_name + '/' + class_name + str(i+1) + '/' + str(j+1) + img_extension)
 				self.list_of_images.append(img)
-				self.list_of_labels.append(class_name + str(i+1))
+				self.list_of_labels.append(i)
 		return self.list_of_images
 
 	def splitDataSet(self,training_percent):
@@ -53,14 +53,14 @@ class Partitioner:
 		#Return: None.
 		'''
 		self.total_samples_overall = len(self.list_of_images)
-		self.training_samples_number = int(training_percent*total_samples_overall)
-		self.testing_samples_number = int(total_samples_overall - training_samples_number)
-		for i in range(training_samples_number):
-			self.train_data_x.append(list_of_images[i])
-			self.train_target_y.append(list_of_labels[i])
-		for j in range(training_samples_number,total_samples_overall):
-			self.test_data_x.append(list_of_images[j])
-			self.test_target_y.append(list_of_labels[j])
+		self.training_samples_number = int(training_percent*self.total_samples_overall)
+		self.testing_samples_number = int(self.total_samples_overall - self.training_samples_number)
+		for i in range(self.training_samples_number):
+			self.train_data_x.append(self.list_of_images[i])
+			self.train_target_y.append(self.list_of_labels[i])
+		for j in range(self.training_samples_number,self.total_samples_overall):
+			self.test_data_x.append(self.list_of_images[j])
+			self.test_target_y.append(self.list_of_labels[j])
 
 	def getTrainingData(self):
 		'''
@@ -69,7 +69,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of training data
 		'''
-		return train_data_x
+		return self.train_data_x
 
 	def getTrainingLabel(self):
 		'''
@@ -78,7 +78,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of training labels
 		'''
-		return train_target_y
+		return self.train_target_y
 
 	def getTestingData(self):
 		'''
@@ -87,7 +87,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of testing data
 		'''
-		return test_data_x
+		return self.test_data_x
 
 	def getTestingLabel(self):
 		'''
@@ -96,7 +96,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of testing labels
 		'''
-		return test_target_y
+		return self.test_target_y
 
 
 			
