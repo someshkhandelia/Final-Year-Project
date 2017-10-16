@@ -1,5 +1,5 @@
 import cv2
-
+import numpy as np
 
 class Partitioner:
 	'''
@@ -40,7 +40,9 @@ class Partitioner:
 
 		for j in range(total_sample):
 			for i in range(total_classes):
-				img = cv2.imread(base_dir_name + '/' + class_name + str(i+1) + '/' + str(j+1) + img_extension)
+				img = cv2.imread(base_dir_name + '/' + class_name + str(i+1) + '/' + str(j+1) + img_extension,0)
+				img = np.asarray(img)
+				img = img.flatten()
 				self.list_of_images.append(img)
 				self.list_of_labels.append(i)
 		return self.list_of_images

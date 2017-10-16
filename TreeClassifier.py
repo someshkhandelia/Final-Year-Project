@@ -34,8 +34,8 @@ class TreeClassifier:
 		#Return: Accuracy of the classifier.
 		'''
 		self.test_images = test_data_x
-		self.predicted_results = self.tree_classifier.predict(test_images)
-		return accuracy_score(test_target_y,predicted_results)
+		self.predicted_results = self.tree_classifier.predict(self.test_images)
+		return accuracy_score(test_target_y,self.predicted_results)
 
 	def saveClassifier(self,pickle_name):
 		'''
