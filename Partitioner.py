@@ -71,6 +71,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of training data
 		'''
+		self.train_data_x = np.asarray(self.train_data_x)
 		return self.train_data_x
 
 	def getTrainingLabel(self):
@@ -80,6 +81,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of training labels
 		'''
+		self.train_target_y = np.asarray(self.train_target_y)
 		return self.train_target_y
 
 	def getTestingData(self):
@@ -89,6 +91,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of testing data
 		'''
+		self.test_data_x = np.asarray(self.test_data_x)
 		return self.test_data_x
 
 	def getTestingLabel(self):
@@ -98,6 +101,7 @@ class Partitioner:
 		#Parameters: None
 		#Return: List of testing labels
 		'''
+		self.test_target_y = np.asarray(self.test_target_y)
 		return self.test_target_y
 
 
