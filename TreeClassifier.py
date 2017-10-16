@@ -52,9 +52,10 @@ class TreeClassifier:
 		This module is to load the trained classifier from a pickle file.
 
 		#Parameters: 'pickle_name' is the name of the pickle file to be loaded.
-		#Return: None
+		#Return: tree_classifier object loaded from the stored pickle
 		'''
 		with open(pickle_name + '.pkl' , 'rb') as fid:
 			self.tree_classifier = pickle.load(fid)
+		return self.tree_classifier
 
 

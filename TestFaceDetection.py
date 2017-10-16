@@ -1,6 +1,7 @@
 from ImageCapture import ImageCapture
 from FaceDetector import FaceDetector
 from Preprocessor import Preprocessor
+from ImageFeederKNN import ImageFeederKNN
 import cv2
 
 cam = cv2.VideoCapture(0)
@@ -25,6 +26,16 @@ obj3 = FaceDetector(img)
 list_of_faces = obj3.detectFacesInImage()
 obj3.saveDetectedFaces(list_of_faces)
 
+####### Predicting using classifier ########################
+'''
+trained_pickle_name = ''
+obj4 = ImageFeederKNN()
+obj4.convertRawDataToTestData(list_of_faces)
+predictions = obj4.getPrediction(trained_pickle_name)
+print('Predictions:')
+print(predictions)
+'''
+############################################################
 
 cam.release()
 cv2.destroyAllWindows()

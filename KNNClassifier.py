@@ -52,10 +52,11 @@ class KNNClassifier:
 		This module is to load the trained classifier from a pickle file.
 
 		#Parameters: 'pickle_name' is the name of the pickle file to be loaded.
-		#Return: None
+		#Return: KNN_classifier object loaded from the stored pickle
 		'''
 		with open(pickle_name + '.pkl' , 'rb') as fid:
 			self.KNN_classifier = pickle.load(fid)
+		return self.KNN_classifier
 
 
 
