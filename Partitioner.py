@@ -44,7 +44,7 @@ class Partitioner:
 				img = np.asarray(img)
 				img = img.flatten()
 				self.list_of_images.append(img)
-				self.list_of_labels.append(i)
+				self.list_of_labels.append(i+1)
 		return self.list_of_images
 
 	def splitDataSet(self,training_percent):

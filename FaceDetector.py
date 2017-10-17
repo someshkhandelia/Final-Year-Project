@@ -10,7 +10,6 @@ class FaceDetector:
 		self.eye_cascade = cv2.CascadeClassifier('HaarCascades/haarcascade_eye.xml')
 		self.img = img
 		self.gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-		self.number_of_detected_faces = 0
 
 	def detectFacesInImage(self):
 		'''
@@ -32,8 +31,6 @@ class FaceDetector:
 		    
 
 	def saveDetectedFaces(self,list_of_faces):
-		self.number_of_detected_faces = len(list_of_faces)
-
 		'''
         This module saves the detected faces as images,separately,
         in the current directory.
@@ -41,8 +38,6 @@ class FaceDetector:
         #Parameters: List of detected faces.
         #Return : None.
         
-        '''
-        
-        
-		for i in range(self.number_of_detected_faces):
+        '''                
+		for i in range(len(list_of_faces)):
 			cv2.imwrite('face_'+str(i+1)+'.pgm',list_of_faces[i])

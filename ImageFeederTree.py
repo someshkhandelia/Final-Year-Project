@@ -31,6 +31,7 @@ class ImageFeederTree:
 		'''
 		length_of_list = len(list_of_images)
 		for i in range(length_of_list):
+			img = list_of_images[i]
 			img = np.asarray(img)
 			img = img.flatten()
 			self.array_of_images.append(img)
