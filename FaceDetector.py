@@ -25,13 +25,15 @@ class FaceDetector:
 		list_of_faces = []
 		for (x,y,w,h) in faces:	
 		    cv2.rectangle(self.img,(x,y),(x+w,y+h),(255,0,0),2)
-		    roi_face = self.gray[y:y+h,x:x+w]
+		    roi_face = self.img[y:y+h,x:x+w]
 		    list_of_faces.append(roi_face)
 		cv2.imwrite('faces_detected.pgm',self.img)
 		return list_of_faces
 		    
 
 	def saveDetectedFaces(self,list_of_faces):
+		self.number_of_detected_faces = len(list_of_faces)
+
 		'''
         This module saves the detected faces as images,separately,
         in the current directory.
@@ -40,6 +42,7 @@ class FaceDetector:
         #Return : None.
         
         '''
-        self.number_of_detected_faces = len(list_of_faces)
+        
+        
 		for i in range(self.number_of_detected_faces):
 			cv2.imwrite('face_'+str(i+1)+'.pgm',list_of_faces[i])
