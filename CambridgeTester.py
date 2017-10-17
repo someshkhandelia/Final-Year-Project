@@ -36,9 +36,9 @@ test_target_y = partition_obj.getTestingLabel()
 
 ########################################################
 
-obj4 = ImageFeederKNN()
-obj4.convertRawDataToTestData(test_data_x)
-predictions = obj4.getPrediction(trained_pickle_name)
+ifk_obj = ImageFeederKNN()
+ifk_obj.convertRawDataToTestData(test_data_x)
+predictions = ifk_obj.getPrediction(trained_pickle_name)
 print("Accuracy:")
 print(accuracy_score(test_target_y,predictions))
 print('Expectations:')

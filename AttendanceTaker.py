@@ -2,7 +2,14 @@ from ImageCapture import ImageCapture
 from FaceDetector import FaceDetector
 from Preprocessor import Preprocessor
 from ImageFeederKNN import ImageFeederKNN
+from FileWriter import FileWriter
 import cv2
+import sys
+
+
+### USAGE ---> python AttendanceTaker.py <course_code> 
+### replace <course_code> by CS-403 etc. 
+
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~ DATA TO BE FILLED BY USER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
@@ -17,20 +24,20 @@ trained_pickle_name = '' ## give pickle to load here(without extension) ##
 ######### capturing the image using webcam ##################
 
 cam = cv2.VideoCapture(0)
-obj1 = ImageCapture()
-img = obj1.getImage(cam)
-obj1.saveCapturedImage(img)
+ic_obj = ImageCapture()
+img = ic_obj.getImage(cam)
+ic_obj.saveCapturedImage(img)
 
 ######### Preprocessing the image ##########################
 
-obj2 = Preprocessor()
-img = obj2.adjustContrast(img)
+prp_obj = Preprocessor()
+img = prp_obj.adjustContrast(img)
 
 ######## Detecting faces in the captured image #############
 
-obj3 = FaceDetector(img)
-list_of_faces = obj3.detectFacesInImage()
-#obj3.saveDetectedFaces(list_of_faces)
+fd_obj = FaceDetector(img)
+list_of_faces = fd_obj.detectFacesInImage()
+#fd_obj.saveDetectedFaces(list_of_faces)
 
 ############################################################
 
@@ -40,11 +47,26 @@ cv2.destroyAllWindows()
 
 ######## Using trained Classifier ##########################
 
-obj4 = ImageFeederKNN()
-obj4.convertRawDataToTestData(list_of_faces)
-predictions = obj4.getPrediction(trained_pickle_name)
-print('The following roll numbers are present:')
-print(predictions)
+ifk_obj = ImageFeederKNN()
+ifk_obj.convertRawDataToTestData(list_of_faces)
+predictions = ifk_obj.getPrediction(trained_pickle_name)
+#print('The following roll numbers are present:')
+#print(predictions)
+
+####### FILE WRITER #################################
+
+#predictions = [33,1,105,67]
+try:
+	course_code = str(sys.argv[1])
+	course_code = course_code.upper()
+	fw_obj = FileWriter(course_code)
+	fw_obj.saveToFile(predictions)
+except IndexError:
+	print("Specify course_code \n### USAGE ---> python AttendanceTaker.py <course_code> \n### replace <course_code> by CS-403 etc.")
+
+
+
+
 
 
 
