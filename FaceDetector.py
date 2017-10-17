@@ -10,7 +10,7 @@ class FaceDetector:
 		self.eye_cascade = cv2.CascadeClassifier('HaarCascades/haarcascade_eye.xml')
 		self.img = img
 		self.gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-		
+		self.number_of_detected_faces = 0
 
 	def detectFacesInImage(self):
 		'''
@@ -25,9 +25,9 @@ class FaceDetector:
 		list_of_faces = []
 		for (x,y,w,h) in faces:	
 		    cv2.rectangle(self.img,(x,y),(x+w,y+h),(255,0,0),2)
-		    roi_face = self.img[y:y+h,x:x+w]
+		    roi_face = self.gray[y:y+h,x:x+w]
 		    list_of_faces.append(roi_face)
-		cv2.imwrite('faces_detected.jpg',self.img)
+		cv2.imwrite('faces_detected.pgm',self.img)
 		return list_of_faces
 		    
 
@@ -40,5 +40,6 @@ class FaceDetector:
         #Return : None.
         
         '''
-		for i in range(len(list_of_faces)):
-			cv2.imwrite('face_'+str(i+1)+'.jpg',list_of_faces[i])
+        self.number_of_detected_faces = len(list_of_faces)
+		for i in range(self.number_of_detected_faces):
+			cv2.imwrite('face_'+str(i+1)+'.pgm',list_of_faces[i])

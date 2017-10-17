@@ -23,6 +23,7 @@ class ImageFeederTree:
 		'''
 		This module is used to convert the list of images,
 		into a format that can be accepted by the classifier.
+		This should be called before getPrediction().
 
 		#Parameters: 'list_of_images' is the List of images for which predictions are needed.
 		#Return: None

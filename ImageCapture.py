@@ -48,7 +48,7 @@ class ImageCapture:
         #Return : None.
 
         '''
-        cv2.imwrite('captured_image.jpg',img)
+        cv2.imwrite('captured_image.pgm',img)
 
 
 
