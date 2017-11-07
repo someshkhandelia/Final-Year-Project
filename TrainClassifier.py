@@ -3,6 +3,7 @@ from KNNClassifier import KNNClassifier
 from TreeClassifier import TreeClassifier
 from tensorflow.contrib import learn
 from sklearn.metrics import accuracy_score
+from PGMConverter import PGMConverter
 import numpy as np
 
 
@@ -17,6 +18,13 @@ training_percent = 0.8
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~ DATA TO BE FILLED BY USER ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
+######## CONVERTING TO .pgm ######################################
+
+pgm_obj = PGMConverter(base_dir_name,class_name,total_classes,total_sample,img_extension)
+pgm_obj.createDirectories()
+pgm_obj.convertToPGM()
+base_dir_name = 'TrainingData'
+img_extension = '.pgm'
 
 
 
