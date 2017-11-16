@@ -26,6 +26,7 @@ class FileWriter:
 			os.makedirs(directory)
 		predictions = np.asarray(predictions)
 		predictions = np.sort(predictions)
+		predictions = set(predictions)
 		f = open(self.file_path, 'w')
 		for item in predictions:
 			f.write(str(item) + '\n')
